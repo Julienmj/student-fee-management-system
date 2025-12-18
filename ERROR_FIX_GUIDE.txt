@@ -1,0 +1,177 @@
+================================================================================
+                    ERROR FIX - TRUNCATE TABLE ERROR
+================================================================================
+
+ERROR MESSAGE:
+"Cannot truncate a table referenced in a foreign key constraint"
+
+CAUSE:
+The TRUNCATE command doesn't work when tables have foreign key relationships.
+
+================================================================================
+                            SOLUTION - 3 OPTIONS
+================================================================================
+
+OPTION 1: Simple Fix (Easiest) ⭐ RECOMMENDED
+---------------------------------------------
+Script: 08_simple_fix.sql
+
+What it does:
+  ✓ Adds missing courses (if not already there)
+  ✓ Removes unused program courses
+  ✓ Removes unused program students
+  ✓ Keeps everything else intact
+  ✓ NO ERRORS!
+
+Use this if:
+  - You just want it to work
+  - You don't care about old data
+  - You want the quickest fix
+
+================================================================================
+
+OPTION 2: Fixed Fresh Start
+----------------------------
+Script: 07_fresh_start_clean_data.sql (NOW FIXED)
+
+What changed:
+  ✗ Old: Used TRUNCATE (caused error)
+  ✓ New: Uses DELETE (works perfectly)
+
+What it does:
+  - Deletes ALL data
+  - Resets ID counters
+  - Adds fresh sample data
+  - Only 3 programs
+
+Use this if:
+  - You want a completely clean slate
+  - You don't need existing data
+
+================================================================================
+
+OPTION 3: Keep Data + Cleanup
+------------------------------
+Script: 06_cleanup_unused_data.sql
+
+What it does:
+  - Keeps your existing students/payments
+  - Only removes unused programs
+  - No truncate errors
+
+Use this if:
+  - You have important data to keep
+  - Just want to remove unused programs
+
+================================================================================
+                        HOW TO FIX (1 MINUTE)
+================================================================================
+
+RECOMMENDED: Use Option 1 (Simple Fix)
+---------------------------------------
+
+1. Open phpMyAdmin
+   http://localhost/phpmyadmin
+
+2. Click: student_fees_db
+
+3. Click: SQL tab
+
+4. Open file: 08_simple_fix.sql
+
+5. Copy ALL content (Ctrl+A, Ctrl+C)
+
+6. Paste into SQL box
+
+7. Click: Go
+
+8. Should see: "SIMPLE FIX COMPLETE"
+
+9. Rebuild project: Shift + F11
+
+10. Run: F6
+
+DONE! ✅
+
+================================================================================
+                            WHAT EACH SCRIPT DOES
+================================================================================
+
+08_simple_fix.sql (RECOMMENDED):
+  ✓ Adds missing courses
+  ✓ Removes unused programs
+  ✓ Quick and safe
+  ✓ No errors
+  ✓ Keeps most data
+
+07_fresh_start_clean_data.sql (FIXED):
+  ✓ Complete reset
+  ✓ Fresh sample data
+  ✓ Clean slate
+  ✓ No errors (now fixed)
+
+06_cleanup_unused_data.sql:
+  ✓ Keeps all your data
+  ✓ Only removes unused
+  ✓ Safe option
+
+================================================================================
+                            VERIFICATION
+================================================================================
+
+After running any script, check:
+
+SQL Tab → Run:
+    SELECT program, COUNT(*) AS courses 
+    FROM fees_courses 
+    GROUP BY program;
+
+You should see ONLY:
+  - INFO MANAGEMENT: 6
+  - NETWORKING: 6
+  - SOFTWARE ENGINEERING: 6
+
+Total: 18 courses
+
+================================================================================
+                        WHY THE ERROR HAPPENED
+================================================================================
+
+TRUNCATE vs DELETE:
+
+TRUNCATE:
+  ✗ Fast but can't handle foreign keys
+  ✗ Causes error with related tables
+  ✗ Can't use with constraints
+
+DELETE:
+  ✓ Works with foreign keys
+  ✓ Respects relationships
+  ✓ Safe to use
+  ✓ Slightly slower but reliable
+
+The fix: Changed TRUNCATE → DELETE in script 07
+
+================================================================================
+                            QUICK REFERENCE
+================================================================================
+
+Best Option: 08_simple_fix.sql
+
+Steps:
+1. phpMyAdmin → student_fees_db → SQL
+2. Copy/paste 08_simple_fix.sql
+3. Click Go
+4. Rebuild (Shift+F11)
+5. Run (F6)
+
+Test:
+- Login as registrar/reg123
+- Select SOFTWARE ENGINEERING
+- Should see 6 courses ✓
+
+================================================================================
+
+                    USE 08_simple_fix.sql - IT JUST WORKS! ✅
+
+================================================================================

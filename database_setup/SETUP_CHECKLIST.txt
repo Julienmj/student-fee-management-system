@@ -1,0 +1,307 @@
+================================================================================
+  STUDENT FEE MANAGEMENT SYSTEM - XAMPP MYSQL SETUP CHECKLIST
+================================================================================
+
+Follow these steps in order. Check each box as you complete it.
+
+================================================================================
+PHASE 1: XAMPP INSTALLATION & STARTUP
+================================================================================
+
+[ ] 1. XAMPP is installed on your PC
+      Location: C:\xampp (default)
+
+[ ] 2. Open XAMPP Control Panel
+      Path: C:\xampp\xampp-control.exe
+
+[ ] 3. Start MySQL service
+      Click "Start" button next to MySQL
+      Status should show "Running" in green
+
+[ ] 4. Verify MySQL is running
+      Port 3306 should be active
+
+================================================================================
+PHASE 2: DATABASE CREATION
+================================================================================
+
+Choose ONE method (A or B):
+
+METHOD A: Using phpMyAdmin (Recommended - Easier)
+--------------------------------------------------
+[ ] 5a. Open web browser
+
+[ ] 6a. Go to: http://localhost/phpmyadmin
+
+[ ] 7a. Login (if prompted)
+       Username: root
+       Password: (leave empty)
+
+[ ] 8a. Click "SQL" tab at the top
+
+[ ] 9a. Open file: 01_create_database.sql
+       Copy ALL content and paste into SQL box
+       Click "Go" button
+       You should see: "Database student_fees_db created successfully!"
+
+[ ] 10a. Select "student_fees_db" from left sidebar
+
+[ ] 11a. Click "SQL" tab again
+
+[ ] 12a. Open file: 02_create_tables.sql
+        Copy ALL content and paste into SQL box
+        Click "Go" button
+        You should see: "All tables created successfully!"
+
+[ ] 13a. Click "SQL" tab again
+
+[ ] 14a. Open file: 03_insert_sample_data.sql
+        Copy ALL content and paste into SQL box
+        Click "Go" button
+        You should see: "Sample data inserted successfully!"
+
+[ ] 15a. Verify tables exist
+        Click "Structure" tab
+        You should see 5 tables:
+        - fees_users
+        - fees_students
+        - fees_courses
+        - fees_enrollments
+        - fees_payments
+
+METHOD B: Using MySQL Command Line (Advanced)
+----------------------------------------------
+[ ] 5b. Open Command Prompt (Win + R, type "cmd")
+
+[ ] 6b. Navigate to MySQL bin:
+       cd C:\xampp\mysql\bin
+
+[ ] 7b. Login to MySQL:
+       mysql -u root -p
+       Press Enter (password is empty)
+
+[ ] 8b. Execute SQL files:
+       source "C:\Users\mujen\OneDrive\Desktop\final project pro\database_setup\01_create_database.sql"
+       source "C:\Users\mujen\OneDrive\Desktop\final project pro\database_setup\02_create_tables.sql"
+       source "C:\Users\mujen\OneDrive\Desktop\final project pro\database_setup\03_insert_sample_data.sql"
+
+[ ] 9b. Verify database:
+       USE student_fees_db;
+       SHOW TABLES;
+       SELECT * FROM fees_users;
+
+================================================================================
+PHASE 3: MYSQL JDBC DRIVER SETUP
+================================================================================
+
+[ ] 16. Download MySQL Connector/J
+       URL: https://dev.mysql.com/downloads/connector/j/
+       Select: Platform Independent (ZIP Archive)
+       Click: Download
+
+[ ] 17. Extract the ZIP file
+       Extract to a location you can remember
+
+[ ] 18. Find the JAR file
+       File name: mysql-connector-j-8.x.x.jar
+       (or mysql-connector-java-8.x.x.jar)
+
+[ ] 19. Open your project in NetBeans
+
+[ ] 20. Add JAR to project
+       Right-click on project name
+       Select "Properties"
+
+[ ] 21. Go to Libraries section
+       Click "Libraries" in left panel
+
+[ ] 22. Add the JAR file
+       Click "Add JAR/Folder" button
+       Navigate to extracted MySQL Connector folder
+       Select the .jar file
+       Click "Open"
+
+[ ] 23. Confirm addition
+       Click "OK" to close Properties window
+       JAR should appear under "Libraries" folder in project
+
+================================================================================
+PHASE 4: VERIFY DATABASE CONNECTION
+================================================================================
+
+[ ] 24. Check DBConnection.java file
+       Location: src/database/DBConnection.java
+       Verify these settings:
+       - URL contains "jdbc:mysql://localhost:3306/student_fees_db"
+       - USERNAME is "root"
+       - PASSWORD is "" (empty string)
+
+[ ] 25. If you set a MySQL password (optional):
+       Edit line 15 in DBConnection.java:
+       private static final String PASSWORD = "your_password";
+
+================================================================================
+PHASE 5: BUILD AND RUN APPLICATION
+================================================================================
+
+[ ] 26. Clean the project
+       In NetBeans: Run → Clean and Build Project
+       Or press: Shift + F11
+
+[ ] 27. Wait for build to complete
+       Check output window for "BUILD SUCCESSFUL"
+
+[ ] 28. Run the application
+       In NetBeans: Run → Run Project
+       Or press: F6
+
+[ ] 29. Application window should open
+       You should see the login screen
+
+================================================================================
+PHASE 6: TEST THE APPLICATION
+================================================================================
+
+Test 1: Registrar Login
+------------------------
+[ ] 30. Select "Registrar" from dropdown
+
+[ ] 31. Enter credentials:
+       Username: registrar
+       Password: reg123
+
+[ ] 32. Click Login
+
+[ ] 33. Registrar Dashboard should open
+       You should see options to:
+       - Manage Courses
+       - Register Students
+       - View student list
+
+Test 2: Accountant Login
+-------------------------
+[ ] 34. Logout and return to login screen
+
+[ ] 35. Select "Accountant" from dropdown
+
+[ ] 36. Enter credentials:
+       Username: accountant
+       Password: acc123
+
+[ ] 37. Click Login
+
+[ ] 38. Accountant Dashboard should open
+       You should see:
+       - List of students with fees
+       - Payment recording options
+       - Financial reports
+
+Test 3: Student Login
+---------------------
+[ ] 39. Logout and return to login screen
+
+[ ] 40. Select "Student" from dropdown
+
+[ ] 41. Enter credentials:
+       Registration Number: 2025001
+       Password: pass123
+
+[ ] 42. Click Login
+
+[ ] 43. Student Dashboard should open
+       You should see:
+       - Personal information
+       - Enrolled courses
+       - Fee summary
+       - Payment history
+
+Test 4: Data Verification
+--------------------------
+[ ] 44. Login as Registrar
+       Verify you can see 5 students in the list
+
+[ ] 45. Login as Accountant
+       Verify you can see student fee summaries
+
+[ ] 46. Login as Student (2025001)
+       Verify you can see 4 enrolled courses
+
+[ ] 47. Check payment history
+       Student 2025001 should have 2 payments
+
+================================================================================
+PHASE 7: ADDITIONAL VERIFICATION (Optional)
+================================================================================
+
+[ ] 48. Test adding a new course (as Registrar)
+
+[ ] 49. Test registering a new student (as Registrar)
+
+[ ] 50. Test recording a payment (as Accountant)
+
+[ ] 51. Test viewing updated information (as Student)
+
+[ ] 52. Check database in phpMyAdmin
+       Verify new records appear in tables
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+If you encounter problems, check these:
+
+Problem: "Communications link failure"
+[ ] MySQL is running in XAMPP Control Panel
+[ ] Port 3306 is not blocked by firewall
+
+Problem: "Access denied for user 'root'"
+[ ] Password in DBConnection.java matches MySQL root password
+[ ] Default XAMPP password is empty
+
+Problem: "ClassNotFoundException: com.mysql.cj.jdbc.Driver"
+[ ] MySQL Connector JAR is added to project libraries
+[ ] JAR file is the correct version (8.x or higher)
+
+Problem: "Unknown database 'student_fees_db'"
+[ ] SQL script 01_create_database.sql was executed
+[ ] Database name is spelled correctly
+
+Problem: "Table doesn't exist"
+[ ] SQL script 02_create_tables.sql was executed
+[ ] All 5 tables were created successfully
+
+Problem: "No data showing"
+[ ] SQL script 03_insert_sample_data.sql was executed
+[ ] Sample data was inserted successfully
+
+Problem: Application won't start
+[ ] Project was cleaned and built successfully
+[ ] No compilation errors in output window
+[ ] All dependencies are resolved
+
+================================================================================
+COMPLETION
+================================================================================
+
+[ ] 53. All tests passed successfully
+
+[ ] 54. Application connects to database
+
+[ ] 55. All three user types can login
+
+[ ] 56. Data is displaying correctly
+
+[ ] 57. No error messages in console
+
+================================================================================
+
+CONGRATULATIONS! Your Student Fee Management System is now running with 
+XAMPP MySQL!
+
+For more help:
+- Read: QUICK_START.md (5-minute guide)
+- Read: SETUP_INSTRUCTIONS.md (detailed guide)
+- Check: 04_useful_queries.sql (SQL reference)
+- Review: MIGRATION_SUMMARY.md (what changed)
+
+================================================================================

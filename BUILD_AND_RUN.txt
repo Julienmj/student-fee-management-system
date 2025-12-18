@@ -1,0 +1,247 @@
+================================================================================
+                    BUILD AND RUN - FINAL STEPS
+================================================================================
+
+ERROR FIXED! ✅
+The lblPayMethodValue error has been resolved.
+
+================================================================================
+                        STEP 1: CLEAN DATABASE
+================================================================================
+
+Remove auto-generated students:
+
+1. Open browser: http://localhost/phpmyadmin
+2. Click: student_fees_db
+3. Click: SQL tab
+4. Open file: database_setup\11_cleanup_sample_students.sql
+5. Copy ALL content
+6. Paste into SQL box
+7. Click: Go
+8. Success! Auto-generated students removed ✅
+
+================================================================================
+                    STEP 2: REBUILD APPLICATION
+================================================================================
+
+In NetBeans:
+
+1. Press: Shift + F11
+   (Clean and Build Project)
+
+2. Wait for output:
+   "BUILD SUCCESSFUL"
+
+3. If you see any errors:
+   - Check MySQL Connector JAR is in Libraries
+   - Check XAMPP MySQL is running
+   - Verify DBConnection.java settings
+
+4. Once successful, proceed to Step 3
+
+================================================================================
+                        STEP 3: RUN APPLICATION
+================================================================================
+
+In NetBeans:
+
+1. Press: F6
+   (Run Project)
+
+2. Application window should open
+
+3. You should see:
+   - Login screen
+   - Dropdown with: Registrar, Accountant, Student
+   - Username and Password fields
+
+4. If application doesn't start:
+   - Check Java console for errors
+   - Verify MySQL is running
+   - Check database connection
+
+================================================================================
+                        STEP 4: TEST NEW FEATURES
+================================================================================
+
+TEST 1: Delete Student Function
+--------------------------------
+1. Login: registrar / reg123
+2. Go to: "Enrolled List" tab
+3. Click: Any student in the list
+4. Click: "Delete Selected Student" (red button at bottom)
+5. Confirm: Click "Yes"
+6. Result: Student removed from list ✅
+
+TEST 2: Payment Method Selection
+---------------------------------
+1. Logout (close window)
+2. Login as: Student
+   - Reg Number: 2025001
+   - Password: pass123
+3. Go to: "Pay" tab
+4. Check: Payment Method dropdown shows MOMO and BK
+5. Select: MOMO
+6. Enter: Amount (e.g., 50000)
+7. Enter: Note (e.g., "First payment")
+8. Click: "Pay"
+9. Result: Payment recorded with MOMO ✅
+10. Check: "Payments" tab shows MOMO payment
+
+TEST 3: Accountant View
+------------------------
+1. Logout
+2. Login: accountant / acc123
+3. Check: List shows only registered students
+4. Check: Colors show payment status
+   - Green = Fully paid
+   - Orange = Partially paid
+   - Red = Not paid
+5. Click: Any student
+6. Result: Payment details shown on right ✅
+
+================================================================================
+                        VERIFICATION CHECKLIST
+================================================================================
+
+Before using the system, verify:
+
+Database:
+[ ] XAMPP MySQL is running (green in Control Panel)
+[ ] Database student_fees_db exists
+[ ] All 5 tables exist
+[ ] Cleanup script was run (no students 2025006+)
+
+Application:
+[ ] Project builds successfully (no errors)
+[ ] Application starts and login screen appears
+[ ] MySQL Connector JAR is in project libraries
+
+Features:
+[ ] Delete button appears in Registrar's Enrolled List
+[ ] Payment method dropdown appears in Student Pay tab
+[ ] Accountant shows student list with colors
+[ ] All three user types can login
+
+================================================================================
+                        COMMON ISSUES & FIXES
+================================================================================
+
+Issue: "BUILD FAILED" error
+Fix: 
+  - Check for red underlines in code
+  - Verify all imports are correct
+  - Clean project: Right-click project → Clean
+
+Issue: "Communications link failure"
+Fix:
+  - Start XAMPP MySQL service
+  - Check port 3306 is not blocked
+  - Verify DBConnection.java settings
+
+Issue: "ClassNotFoundException: com.mysql.cj.jdbc.Driver"
+Fix:
+  - Right-click project → Properties
+  - Libraries → Add JAR/Folder
+  - Add mysql-connector-j-8.x.x.jar
+
+Issue: Delete button not showing
+Fix:
+  - Rebuild project (Shift + F11)
+  - Check RegistrarDashboard.java compiled correctly
+
+Issue: Payment dropdown not showing
+Fix:
+  - Rebuild project (Shift + F11)
+  - Check StudentDashboard.java compiled correctly
+
+Issue: Too many students in Accountant view
+Fix:
+  - Run 11_cleanup_sample_students.sql
+  - Refresh Accountant dashboard
+
+================================================================================
+                        SYSTEM REQUIREMENTS
+================================================================================
+
+Software:
+✓ XAMPP (MySQL running)
+✓ NetBeans IDE
+✓ Java JDK 8 or higher
+✓ MySQL Connector/J 8.x
+
+Database:
+✓ MySQL on port 3306
+✓ Database: student_fees_db
+✓ Username: root
+✓ Password: (empty)
+
+Files:
+✓ All Java source files compiled
+✓ MySQL Connector JAR in libraries
+✓ Database setup scripts executed
+
+================================================================================
+                        FINAL CHECKLIST
+================================================================================
+
+Complete these in order:
+
+[ ] 1. XAMPP MySQL is running
+[ ] 2. Database cleanup script executed
+[ ] 3. Project cleaned and built (Shift + F11)
+[ ] 4. BUILD SUCCESSFUL message shown
+[ ] 5. Application runs (F6)
+[ ] 6. Login screen appears
+[ ] 7. Registrar login works
+[ ] 8. Delete button visible in Enrolled List
+[ ] 9. Student login works
+[ ] 10. Payment dropdown shows MOMO and BK
+[ ] 11. Accountant login works
+[ ] 12. Student list shows with colors
+
+================================================================================
+                        SUCCESS INDICATORS
+================================================================================
+
+You'll know everything is working when:
+
+✅ Application starts without errors
+✅ All three user types can login
+✅ Registrar sees delete button in Enrolled List
+✅ Student sees payment method dropdown (MOMO/BK)
+✅ Accountant sees color-coded student list
+✅ Payments can be recorded
+✅ Students can be deleted
+✅ No error messages in console
+
+================================================================================
+                        QUICK REFERENCE
+================================================================================
+
+Build Commands:
+  Clean and Build: Shift + F11
+  Run Project: F6
+  Stop Application: Shift + F5
+
+Test Credentials:
+  Registrar: registrar / reg123
+  Accountant: accountant / acc123
+  Student: 2025001 / pass123
+
+Database:
+  phpMyAdmin: http://localhost/phpmyadmin
+  Database: student_fees_db
+  Tables: 5 (fees_users, fees_students, fees_courses, 
+             fees_enrollments, fees_payments)
+
+Documentation:
+  Features: NEW_FEATURES_ADDED.md
+  Quick Guide: QUICK_ACTION_GUIDE.txt
+  This File: BUILD_AND_RUN.txt
+
+================================================================================
+
+                    READY TO BUILD! FOLLOW THE STEPS ABOVE ✅
+
+================================================================================

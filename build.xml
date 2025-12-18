@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NetBeans-style Ant script mirroring FuelTrackingApp layout -->
+<project name="StudentFeesTrackerApp" default="default" basedir=".">
+    <description>Builds, tests, and runs the project StudentFeesTrackerApp.</description>
+    <import file="nbproject/build-impl.xml"/>
+</project>
+

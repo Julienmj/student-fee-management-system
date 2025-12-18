@@ -1,0 +1,285 @@
+================================================================================
+                    TEST EXECUTION CHECKLIST
+================================================================================
+
+Use this checklist to verify all features are working correctly.
+
+================================================================================
+                        PRE-TEST SETUP
+================================================================================
+
+[  ] XAMPP MySQL is running
+[  ] Database student_fees_db exists
+[  ] All tables created (5 tables)
+[  ] Sample data loaded
+[  ] Application builds successfully
+[  ] Application runs without errors
+
+================================================================================
+                    MODULE 1: AUTHENTICATION (3 tests)
+================================================================================
+
+TEST 1.1: Registrar Login - Valid
+[ ] Launch application
+[ ] Select "Registrar"
+[ ] Enter: registrar / reg123
+[ ] Click Login
+[ ] ✅ Registrar Dashboard opens
+
+TEST 1.2: Invalid Login
+[ ] Enter: wrong / wrong
+[ ] Click Login
+[ ] ✅ Error message displayed
+[ ] ✅ Remains on login screen
+
+TEST 1.3: Student Login
+[ ] Select "Student"
+[ ] Enter: 2025001 / pass123
+[ ] Click Login
+[ ] ✅ Student Dashboard opens
+
+RESULT: ____ / 3 PASSED
+
+================================================================================
+                MODULE 2: STUDENT REGISTRATION (3 tests)
+================================================================================
+
+TEST 2.1: Register New Student
+[ ] Login as Registrar
+[ ] Go to "Register Student" tab
+[ ] Click "Generate" button
+[ ] Enter name: "Test Student"
+[ ] Select program: "SOFTWARE ENGINEERING"
+[ ] Enter password: "test123"
+[ ] Select 3 courses
+[ ] Click "Register"
+[ ] ✅ Success message shown
+[ ] ✅ Student in Enrolled List
+
+TEST 2.2: Missing Required Fields
+[ ] Leave name empty
+[ ] Click "Register"
+[ ] ✅ Error message shown
+[ ] ✅ Student not created
+
+TEST 2.3: No Courses Selected
+[ ] Fill student details
+[ ] Don't select courses
+[ ] Click "Register"
+[ ] ✅ Error message shown
+
+RESULT: ____ / 3 PASSED
+
+================================================================================
+                MODULE 3: COURSE MANAGEMENT (3 tests)
+================================================================================
+
+TEST 3.1: Add New Course
+[ ] Go to "Course Catalog" tab
+[ ] Select program
+[ ] Enter course name: "Test Course"
+[ ] Enter price: "150000"
+[ ] Click "Add"
+[ ] ✅ Success message
+[ ] ✅ Course in table
+
+TEST 3.2: Update Course
+[ ] Select course from table
+[ ] Modify name or price
+[ ] Click "Update"
+[ ] ✅ Success message
+[ ] ✅ Changes reflected
+
+TEST 3.3: Delete Course
+[ ] Select course
+[ ] Click "Delete"
+[ ] ✅ Course removed
+
+RESULT: ____ / 3 PASSED
+
+================================================================================
+                MODULE 4: STUDENT DELETION (2 tests)
+================================================================================
+
+TEST 4.1: Delete with Confirmation
+[ ] Go to "Enrolled List" tab
+[ ] Click on a student
+[ ] Click "Delete Selected Student"
+[ ] Read confirmation dialog
+[ ] Click "Yes"
+[ ] ✅ Student removed
+[ ] ✅ Confirmation shown
+
+TEST 4.2: Cancel Deletion
+[ ] Select student
+[ ] Click "Delete Selected Student"
+[ ] Click "No"
+[ ] ✅ Student NOT deleted
+[ ] ✅ Still in list
+
+RESULT: ____ / 2 PASSED
+
+================================================================================
+                MODULE 5: PAYMENT PROCESSING (4 tests)
+================================================================================
+
+TEST 5.1: MOMO Payment
+[ ] Login as Student (2025001/pass123)
+[ ] Go to "Pay" tab
+[ ] Select method: "MOMO"
+[ ] Enter amount: "50000"
+[ ] Enter note: "Test payment"
+[ ] Click "Pay"
+[ ] ✅ Success message with MOMO
+[ ] ✅ Payment in history
+[ ] ✅ Balance updated
+
+TEST 5.2: BK Payment
+[ ] Select method: "BK"
+[ ] Enter amount: "75000"
+[ ] Click "Pay"
+[ ] ✅ Success message with BK
+[ ] ✅ Method shows as BK
+
+TEST 5.3: Negative Amount
+[ ] Enter amount: "-1000"
+[ ] Click "Pay"
+[ ] ✅ Error: "Amount must be positive"
+[ ] ✅ Payment NOT recorded
+
+TEST 5.4: Empty Amount
+[ ] Leave amount empty
+[ ] Click "Pay"
+[ ] ✅ Error: "Enter amount to pay"
+[ ] ✅ Payment NOT recorded
+
+RESULT: ____ / 4 PASSED
+
+================================================================================
+                MODULE 6: FEE TRACKING (2 tests)
+================================================================================
+
+TEST 6.1: View Fee Summary
+[ ] Login as Accountant (accountant/acc123)
+[ ] View student list
+[ ] Check color coding:
+    [ ] Green = Fully paid
+    [ ] Orange = Partially paid
+    [ ] Red = Not paid
+[ ] Click on a student
+[ ] ✅ Payment details shown
+
+TEST 6.2: Payment History
+[ ] Select student with payments
+[ ] View right panel
+[ ] ✅ All payments listed
+[ ] ✅ Dates correct
+[ ] ✅ Methods shown (MOMO/BK)
+[ ] ✅ Amounts accurate
+
+RESULT: ____ / 2 PASSED
+
+================================================================================
+                MODULE 7: DATABASE OPERATIONS (2 tests)
+================================================================================
+
+TEST 7.1: SQL Injection Prevention
+[ ] Go to login screen
+[ ] Enter username: admin' OR '1'='1
+[ ] Enter password: anything
+[ ] Click Login
+[ ] ✅ Login fails
+[ ] ✅ No SQL error shown
+[ ] ✅ No unauthorized access
+
+TEST 7.2: Cascade Delete
+[ ] Note: Check database directly
+[ ] Delete a student with enrollments
+[ ] Check database:
+    [ ] ✅ Student deleted
+    [ ] ✅ Enrollments deleted
+    [ ] ✅ Payments deleted
+
+RESULT: ____ / 2 PASSED
+
+================================================================================
+                        OVERALL TEST SUMMARY
+================================================================================
+
+Module 1 (Authentication):      ____ / 3
+Module 2 (Registration):        ____ / 3
+Module 3 (Course Management):   ____ / 3
+Module 4 (Student Deletion):    ____ / 2
+Module 5 (Payment Processing):  ____ / 4
+Module 6 (Fee Tracking):        ____ / 2
+Module 7 (Database Operations): ____ / 2
+
+TOTAL:                          ____ / 19
+
+PASS RATE: _____%
+
+================================================================================
+                        ADDITIONAL CHECKS
+================================================================================
+
+UI/UX:
+[ ] All buttons work
+[ ] Tables display correctly
+[ ] Colors are appropriate
+[ ] Text is readable
+[ ] No UI glitches
+
+Performance:
+[ ] Application starts quickly (< 5 seconds)
+[ ] Database queries fast (< 1 second)
+[ ] No lag in UI
+[ ] Smooth navigation
+
+Error Handling:
+[ ] Appropriate error messages
+[ ] No crashes
+[ ] Graceful failure handling
+[ ] User-friendly messages
+
+Security:
+[ ] Passwords required
+[ ] SQL injection prevented
+[ ] No sensitive data in errors
+[ ] Proper authentication
+
+Data Integrity:
+[ ] No duplicate students
+[ ] Correct fee calculations
+[ ] Accurate payment tracking
+[ ] Proper foreign key constraints
+
+================================================================================
+                        REGRESSION TESTING
+================================================================================
+
+After any code changes, re-test:
+[ ] Login functionality
+[ ] Student registration
+[ ] Payment processing
+[ ] Database operations
+
+================================================================================
+                        SIGN-OFF
+================================================================================
+
+Tester Name: _______________________
+
+Date: _______________________
+
+Signature: _______________________
+
+Notes/Comments:
+_________________________________________________________________
+_________________________________________________________________
+_________________________________________________________________
+
+================================================================================
+
+                    ALL TESTS COMPLETE! ✅
+
+================================================================================
