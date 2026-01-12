@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# Student Fee Management System.
+# Student Fee Management System
 
 A comprehensive Java-based desktop application for managing student fees, course enrollments, and payment tracking in educational institutions.
 
