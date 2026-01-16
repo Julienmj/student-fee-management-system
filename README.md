@@ -1,7 +1,8 @@
 <<<<<<< HEAD
 # Student Fee Management System
 
-A comprehensive Java-based desktop application for managing student fees, course enrollments, and payment tracking in educational institutions.
+A comprehensive Java-based desktop application for managing student fees, course enrollments, and payment tracking in educational institutions!
+
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=java&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
